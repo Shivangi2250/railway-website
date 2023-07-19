@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+
+</body>
+</html>{% extends "base.html" %}
+{% block title %}
+    Market Page
+{% endblock %}
+
+{% block content %}
+
+<style>
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background: #fff;
+    color: #333;
+    line-height: 1.6;
+}
+
+  ul {
+      list-style: none;
+  }
+
+  a {
+      color: #333;
+      text-decoration: none;
+  }
+
+  h1, h2 {
+      font-weight: 300;
+      line-height: 1.2;
+  }
+
+  p {
+      margin: 10px 0;
+  }
+
+  img {
+      width: 100%;
+  }
+
+
+
+  /* Icons */
+  .icons {
+      padding: 30px;
+  }
+
+  .icons h3 {
+      font-weight: bold;
+      margin-bottom: 15px;
+  }
+
+  .icons i {
+      background-color: #28a745;
+      color: #fff;
+      padding: 1rem;
+      border-radius: 50%;
+      margin-bottom: 15px;
+  }
+
+  .cases img:hover {
+      opacity: 0.7;
+  }
+
+  .team img {
+      border-radius: 50%;
+  }
+
+  /* Callback form */
+  .callback-form {
+      width: 100%;
+      padding: 20px 0;
+  }
+
+  .callback-form label {
+      display: block;
+      margin-bottom: 5px;
+  }
+
+  .callback-form .form-control {
+      margin-bottom: 15px;
+  }
+
+  .callback-form input {
+      width: 100%;
+      padding: 4px;
+      height: 40px;
+      border: #f5f5f5 1px solid;
+  }
+
+  .callback-form input:focus {
+      outline-color: #28a745;
+  }
+
+  .callback-form .btn {
+      padding: 12px 0;
+      margin-top: 20px;
+  }
+
+  /* Post */
+  .post {
+      padding: 50px 30px;
+  }
+
+  .post h2 {
+      font-size: 40px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: #ccc solid 1px;
+  }
+
+  .post .meta {
+      margin-bottom: 30px;
+  }
+
+  .post img {
+      width: 300px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto 30px;
+  }
+
+  /* Footer */
+  .footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 200px;
+  }
+
+
+  /* Mobile */
+  @media(max-width: 768px) {
+
+
+      .flex-items {
+          flex-direction: column!important;
+      }
+
+      .flex-columns .column, .flex-grid .column {
+          flex: 100% !important;
+          max-width: 100% !important;
+      }
+
+      .team img {
+          width: 70%;
+      }
+  }
+
+    /* Text colors */
+  .text-primary {
+      color: #28a745;
+  }
+
+  .text-secondary {
+      color: #0284d0;
+  }
+
+  /* Button */
+  .btn {
+      cursor: pointer;
+      display: inline-block;
+      padding: 10px 30px;
+      color: #fff;
+      background-color: #28a745;
+      border: none;
+      border-radius: 5px;
+  }
+
+  .btn:hover {
+      opacity: 0.9;
+  }
+
+  .btn-primary, .bg-primary {
+     background: #28a745;
+     color: #fff;
+  }
+  .btn-secondary, .bg-secondary {
+     background: #0284d0;
+     color: #fff;
+  }
+  .btn-dark, .bg-dark {
+     background: #333;
+     color: #fff;
+  }
+  .btn-light, .bg-light {
+     background: #f4f4f4;
+     color: #333;
+  }
+
+  .btn-outline {
+      background: transparent;
+      border: 1px solid #fff;
+  }
+
+  /* Flex items */
+  .flex-items {
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      text-align: center;
+      height: 100%;
+  }
+
+  .flex-items > div {
+      padding: 20px;
+  }
+
+  /* Flex columns */
+  .flex-columns.flex-reverse .row {
+      flex-direction: row-reverse;
+  }
+
+  .flex-columns .row {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%;
+  }
+
+  .flex-columns .column {
+      display: flex;
+      flex-direction: column;
+      flex-basis: 100%;
+      flex: 1;
+  }
+
+  .flex-columns .column .column-1,
+  .flex-columns .column .column-2 {
+      height: 100%;
+  }
+
+  .flex-columns img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+  }
+
+  .flex-columns .column-2 {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 30px;
+  }
+
+  .flex-columns h2 {
+      font-size: 40px;
+      font-weight: 100;
+  }
+
+  .flex-columns h4 {
+      margin-bottom: 10px;
+  }
+
+  .flex-columns p {
+      margin: 20px 0;
+  }
+
+  /* Section header */
+  .section-header {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+  }
+
+  .section-header h2 {
+      font-size: 40px;
+      margin: 20px 0;
+  }
+
+  .section-padding {
+      padding: 20px 20px 40px;
+  }
+
+  /* Flex grid */
+  .flex-grid .row {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 4px;
+  }
+
+  .flex-grid .column {
+      flex: 25%;
+      max-width: 25%;
+      padding: 0 4px;
+  }
+</style>
+
+    <main>
+      <article class="flex-columns" style="margin-top:10px;">
+        <h1 class="l-heading" style="color:#fff;text-align:center;">Leaders of Railways</h1>
+        <div class="row">
+          <div class="column">
+            <div class="column-1">
+              <img src="https://media.licdn.com/dms/image/C4D03AQGSpJWODc_eyg/profile-displayphoto-shrink_800_800/0/1643045139959?e=2147483647&v=beta&t=E7OXGjZYbFBgkxF1zF3Fi3BcbVGzWZwTdMqoJiC1Pw0" alt="" />
+            </div>
+          </div>
+          <div class="column">
+            <div class="column-2 bg-light">
+              <h2>Shri Ashwini Vaishnaw</h2>
+              <p class="meta">
+
+                <strong>Minister for Railways</strong>
+              </p>
+              <p>
+                Ashwini Vaishnaw (born 18 July 1970) is an Indian politician and former IAS officer who is currently serving as the 39th Minister of Railways, 55th Communications Minister and 2nd Electronics & Information Technology Minister in Government of India since 2021.
+
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="flex-columns flex-reverse">
+        <div class="row">
+          <div class="column">
+            <div class="column-1">
+              <img  src="https://upload.wikimedia.org/wikipedia/commons/4/42/The_Minister_of_State_for_Consumer_Affairs%2C_Food_and_Public_Distribution%2C_Shri_Raosaheb_Dadarao_Danve_calls_on_the_Prime_Minister%2C_Shri_Narendra_Modi%2C_in_New_Delhi_on_March_05%2C_2015_%28cropped%29.jpg" alt="" />
+            </div>
+          </div>
+          <div class="column">
+            <div class="column-2 bg-dark">
+              <h2>Shri Danve Raosaheb Dadarao</h2>
+              <p class="meta">
+                <strong>Minister of State in the Ministry of Railways</strong>
+              </p>
+              <p>
+                Raosaheb Dadarao Danve Patil (born 18 March 1955) is an Indian politician and current Minister of State in the Ministry of Railways,
+                Ministry of Coal and Ministry of Mines in Second Modi ministry.
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="flex-columns">
+        <div class="row">
+          <div class="column">
+            <div class="column-1">
+              <img src="https://pbs.twimg.com/profile_images/1566738756371386368/5nsiLwPG_400x400.jpg" alt="" />
+            </div>
+          </div>
+          <div class="column">
+            <div class="column-2 bg-light">
+              <h2>Smt. Darshana Jardosh</h2>
+              <p class="meta">
+                <strong>Minister of State in the Ministry of Railways</strong>
+              </p>
+              <p>
+                Darshana Jardosh (born 21 January 1961) is an Indian politician and currently serving as Union State Minister of Railways and Union State Minister of Textiles.
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </article>
+    </main>
+
+
+{% endblock %}

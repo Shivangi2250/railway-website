@@ -1,0 +1,581 @@
+{% extends 'base.html' %}
+{% block title %}
+    North Western Railway
+{% endblock %}
+{% block content %}
+
+
+<style>
+    :root{
+      --primary-color: #c72727;
+      --secondary-color: #f99500;
+      --light-color: #f3f3f3;
+      --dark-color:#333;
+      --max-width: 1100px;
+    }
+
+    .category{
+      --sports-color: #f99500;
+      --ent-color: #a66bbe;
+      --tech-color: #009cff;
+    }
+
+    *{
+      margin:0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body{
+      background: #212121;
+      font-family: 'Lato', sans-serif;
+      line-height: 1.5;
+    }
+
+    a{
+      color:#333;
+      text-decoration: none;
+    }
+
+    ul{
+      list-style: none;
+    }
+
+    p{
+      margin: 0.5rem 0;
+    }
+
+    img{
+      width:100%;
+    }
+
+    h1, h2, h3, h4, h5, h6{
+      font-family: 'Staatliches', cursive;
+      margin-bottom: 0.55rem;
+      line-height: 1.3;
+    }
+
+    /* utility */
+    .container{
+      max-width:var(--max-width) ;
+      margin:auto;
+      padding: 0 2rem;
+      overflow: hidden;
+    }
+
+    .category{
+      display: inline-block;
+      color: #fff;
+      padding: 0.4rem 0.6rem;
+      margin-bottom: 0.7rem;
+      border-radius: 15px;
+      text-transform: uppercase;
+      font-size: 0.65rem;
+      font-weight: bold;
+    }
+
+    .category-sports{
+      background: var(--sports-color);
+    }
+    .category-ent{
+      background: var(--ent-color);
+    }
+    .category-tech{
+      background: var(--tech-color);
+    }
+
+    .btn{
+      display: inline-block;
+      border: none;
+      background: var(--dark-color);
+      color:#fff;
+      padding:0.5rem 1.5rem;
+    }
+
+    .btn-light{
+      background: var(--light-color);
+    }
+    .btn-primary{
+      background: var(--primary-color);
+    }
+    .btn-secondary{
+      background: var(--secondary-color);
+    }
+    .btn-block{
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+    .btn:hover{
+      opacity: 0.9;
+    }
+
+    .card{
+      background: #fff;
+      padding:1rem;
+    }
+
+    .bg-dark{
+      background-color: var(--dark-color);
+      color: #fff;
+    }
+    .bg-primary{
+      background-color: var(--primary-color);
+      color: #ddd;
+    }
+    .bg-secondary{
+      background-color: var(--secondary-color);
+      color: #fff;
+    }
+
+    .bg-dark h1,
+    .bg-dark h2,
+    .bg-dark h3,
+    .bg-dark a,
+    .bg-primary h1,
+    .bg-primary h2,
+    .bg-primary h3,
+    .bg-primary a,
+    .bg-secondary h1,
+    .bg-secondary h2,
+    .bg-secondary h3,
+    .bg-secondary a{
+      color: #fff;
+    }
+
+    .py-1{ padding: 1.5rem 0;}
+    .py-2{ padding: 2rem 0;}
+    .py-3{ padding: 3rem 0;}
+    .p-1{ padding: 1.5rem;}
+    .p-2{ padding: 2rem;}
+    .p-3{ padding: 3rem;}
+
+    .l-heading{
+      font-size:3rem;
+    }
+
+    .list li{
+      padding:0.5rem 0;
+      border-bottom:#555 dotted 1px;
+      width: 90%;
+    }
+
+    .list li a:hover{
+      color:var(--primary-color) !important;
+    }
+
+    /* Inner page grid container */
+    .page-container{
+      display: grid;
+      grid-template-columns: 5fr 2fr;
+      margin: 1rem 0;
+      grid-gap: 1.5rem;
+    }
+
+    .page-container > *:first-child{
+      grid-row: 1 / span 3;
+    }
+
+    /* navigation */
+    #main-nav{
+      background-color: #fff;
+      position:sticky;
+      z-index: 2;
+      top:0;
+    }
+
+    #main-nav .container{
+      display: grid;
+      grid-template-columns: 6fr 3fr 1fr;
+      align-items: center;
+      padding:1rem;
+    }
+
+    #main-nav .logo{
+      width:180px;
+    }
+
+
+    #main-nav ul{
+      justify-self: end;
+      display: flex;
+    }
+
+    #main-nav ul li a{
+      padding:0.75rem;
+      font-weight:bold;
+    }
+
+    #main-nav ul li a.current{
+      background: var(--primary-color);
+      color: #fff;
+    }
+
+    #main-nav ul li a{
+      transition: all ease-in-out 0.4s;
+    }
+
+    #main-nav ul li a:hover{
+      background: var(--light-color);
+      color:var(--dark-color);
+    }
+
+    #main-nav .social{
+      justify-self: center;
+    }
+
+    #main-nav .social i{
+      color:#777;
+      margin-right:0.5rem;
+    }
+
+    #main-nav .social i:hover{
+      color: #333;
+    }
+
+    #showcase{
+      position: relative;
+      background: #333;
+      color: #fff;
+      padding:2rem;
+
+    }
+
+    #showcase:before{
+      content: '';
+      background: url('https://www.rrcjaipur.in/images/nwr3.jpg') no-repeat center center/cover;
+      position: absolute;
+      top:0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.5;
+    }
+    #showcase .showcase-container{
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      justify-content: center;
+      align-items: center;
+      height: 50vh;
+    }
+
+    #showcase .showcase-content{
+      z-index:1;
+    }
+
+    #showcase .showcase-content p{
+      margin-bottom: 1rem;
+    }
+
+    .heading-nwr{
+    font-weight: bold;
+
+    }
+
+    /* HOme article */
+    #home-articles .articles-container{
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      grid-gap: 1rem;
+    }
+
+    #home-articles .articles-container > *:first-child{
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      grid-gap: 1rem;
+      align-items: center;
+      grid-column: 1/span 2;
+    }
+    #home-articles .articles-container > *:last-child{
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      grid-gap: 1rem;
+      align-items: center;
+      grid-column: 2/span 2;
+    }
+
+    #article .meta{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #eee;
+      padding:0.5rem;
+    }
+
+    #article .meta .category{
+      margin-top: 0.4rem;
+    }
+
+    /* footer */
+    #main-footer {
+      background: var(--dark-color);
+      color: #fff;
+    }
+
+    #main-footer img{
+      width:150px;
+    }
+
+    #main-footer a{
+      color:#fff;
+      text-decoration: none;
+    }
+
+    #main-footer .footer-container {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      padding:1rem;
+      grid-gap: 2rem;
+      text-align: center;
+    }
+
+    #main-footer .footer-container > *:last-child{
+      background-color: #444;
+      grid-column: 1/ span 3;
+      font-size: 0.75rem;
+    }
+
+    #main-footer .footer-container input[type='email']{
+      width:90%;
+      padding:0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    #main-footer .footer-container input[type='submit']{
+      width:90%;
+    }
+
+    /* nsvigation */
+    #main-nav .social{
+      display: none;
+    }
+
+    #main-nav .container{
+      grid-template-columns: 1fr;
+      grid-gap: 1.2rem;
+    }
+
+    #main-nav ul,
+    #main-nav .logo{
+      justify-self: center;
+    }
+
+    #main-nav ul li a{
+      padding: 0.50rem;
+    }
+
+    #home-articles .articles-container{
+      grid-template-columns: repeat(2,1fr);
+    }
+
+    #home-articles .articles-container > *:first-child,
+    #home-articles .articles-container > *:last-child{
+      grid-template-columns: 1fr;
+      grid-column: 1;
+    }
+
+
+    @media(max-width: 600px){
+      /* stack grid item */
+      #showcase .showcase-container,
+      #home-articles .articles-container,
+      #main-footer .footer-container {
+        grid-template-columns: 1fr;
+      }
+
+      #main-footer .footer-container> *:last-child {
+        grid-column: 1;
+      }
+
+      #main-footer .footer-container > *:first-child,
+      #main-footer .footer-container > *:nth-child(2){
+        border-bottom: #444 dotted 1px;
+        padding-bottom: 1rem;
+      }
+
+      .page-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .page-container > *:first-child{
+        grid-row: 1;
+      }
+
+      .page-container .meta{
+        flex-direction: column;
+      }
+
+      .l-heading{
+        font-size: 2rem;
+      }
+
+
+    }
+
+</style>
+
+  <!-- showcase -->
+  <header id="showcase">
+    <div class="container">
+      <div class="showcase-container">
+        <div class="showcase-content">
+<!--          translate languages-->
+          <div class="category category-sports">Translate this page:
+            <select onchange="languageChanger()" id="google_translate_element" style="border:none; font-size:13px; background-color:#f99500;font-weight:bold; color:brown;">
+              <option value="en" >English</option>
+              <option value="hi">Hindi</option>
+            </select>
+
+
+
+          </div>
+          <h1>Welcome to <span class="heading-nwr">North Western Railway</span> </h1>
+<!--          <h1>Welcome to <span class="txt-type heading-nwr" data-wait="3000" data-words='["North Western Railway"]'></span></h1>-->
+          <h5><span class="txt-type " data-wait="3000" data-words='["Serving Customers with a Smile"]'></span></h5>
+          <a href="{{ url_for('market_page') }}" class="btn more btn-primary">More ></a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Home Article -->
+  <section id="home-articles" class="py-2" >
+    <div class="container" >
+      <h2 style="color:#fff;">General Information</h2>
+
+      <div style="padding-top:40px;" class="articles-container" >
+
+       <article class="card bg-dark">
+          <div ><a style="background:#f99500;" class="btn btn-secondary category category-sports" href="https://www.irctctourism.com/">Tourists Section</a></div>
+          <h3>
+           this is Our Tourists Section
+          </h3>
+          <p> The Railways contribute tremendously towards tourism as the prime mode of transport for all kinds of tourists from both domestic and international sector. In addition to offering simple train journeys from point to point to the tourists as well as general public.</p>
+       </article>
+
+        <article class="card" style="display: grid;grid-template-columns: repeat(2,1fr);grid-gap: 1rem;">
+          <img style="border-radius:20px; height:200px;" src="https://media.istockphoto.com/id/1269800276/photo/portrait-engineer-under-inspection-and-checking-construction-process-railway-switch-and.jpg?s=612x612&w=0&k=20&c=srxVNmjMB31Bgf-66RavYXvrAUqHt8-eJO2im3CQYpg=" alt="">          <div>
+
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle category category-ent" style="background-color:#a66bbe;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              More Services
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="https://www.fois.indianrail.gov.in/RailSAHAY/index.jsp">Freight Business</a>
+              <a class="dropdown-item" href="https://artsandculture.google.com/project/indian-railways">Explore Rail Heritage On-line</a>
+              <a class="dropdown-item" href="https://indianrailways.gov.in/GST/index.html">GST-Indian Railways</a>
+              <a class="dropdown-item" href="https://pensionersportal.gov.in/">Pansion Portal</a>
+              <a class="dropdown-item" href="https://www.nvsp.in/">National Voters Service Portal</a>
+            </div>
+          </div>
+            <h3 style="color:#343a40;">
+              Here are some other portals and businesses where we serve.
+            </h3>
+          </div>
+        </article>
+
+        <article class="card" style="display: grid;grid-template-columns: repeat(2,1fr);grid-gap: 1rem;">
+          <img style="border-radius:20px; height:220px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkeOc5VsLax0ue69kZZUtStF1TeKEVo-cnxw&usqp=CAU" alt="">
+           <div>
+
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle category category-ent" style="background-color: #A78295;" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Passenger Details
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a style=" text-transform: lowercase;" class="dropdown-item" href="https://www.indianrail.gov.in/enquiry/StaticPages/StaticEnquiry.jsp?StaticPage=index.html">PNR Status Check</a>
+                      <a style=" text-transform: lowercase;" class="dropdown-item" href="https://www.irctc.co.in/nget/train-search">Berth/ Seat Reservation</a>
+                      <a style=" text-transform: lowercase;" class="dropdown-item" href="https://enquiry.indianrail.gov.in/">Train Schedule</a>
+                      <a style=" text-transform: lowercase;" class="dropdown-item" href="https://www.indianrail.gov.in/enquiry/StaticPages/StaticEnquiry.jsp?StaticPage=index.html">Trains Between Stations</a>
+                      <a style=" text-transform: lowercase;" class="dropdown-item" href="https://www.indianrail.gov.in/enquiry/StaticPages/StaticEnquiry.jsp?StaticPage=index.html">Seat Availability</a>
+                </div>
+          </div>
+            <h3 style="color:#212121;">
+              access important information related to your train journey.
+            </h3>
+<!--            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium illo tempora natus eaque dolorum reiciendis? Voluptas ducimus expedita vitae saepe.</p>-->
+          </div>
+        </article>
+
+
+       <article class="card bg-dark">
+          <div><a style="background:#91C788" class="btn btn-secondary category category-sports" href="https://nwr.indianrailways.gov.in/view_section.jsp?fontColor=black&backgroundColor=LIGHTSTEELBLUE&lang=0&id=0,7,276">Other Railway Sites</a></div>
+          <h3>
+           this is Our Tourists Section
+          </h3>
+          <p> You can check in other railway sites for additional information about different zonal railways, production, etc. Each website within our network serves a unique purpose, providing specialized features and functionalities.</p>
+       </article>
+
+
+       <article class="card bg-dark">
+          <div><a style="background:#E84545" class="btn btn-secondary category category-sports" href="https://railmadad.indianrailways.gov.in/">Complaint</a></div>
+          <h3>
+            Complaint (Rail Madad) Section
+          </h3>
+          <p>We recognize the importance of a reliable and efficient rail system, and we strive to deliver the best service to our passengers. Our Complaint Portal is specifically designed to provide you with a platform to voice your complaints and seek resolution.</p>
+       </article>
+
+
+
+<!--        <article class="card bg-dark">-->
+<!--          <div style="background:#91C788" ><a class="btn btn-secondary category category-sports" href="https://nwr.indianrailways.gov.in/view_section.jsp?fontColor=black&backgroundColor=LIGHTSTEELBLUE&lang=0&id=0,7,276">Other Railway Sites</a></div>-->
+<!--          <h3>-->
+<!--            All other Railway Websites-->
+<!--          </h3>-->
+<!--          <p> You can check in other railway sites for additional information about different zonal railways, production, etc. Each website within our network serves a unique purpose, providing specialized features and functionalities.</p>-->
+<!--        </article>-->
+
+
+
+<!--        <article class="card bg-dark">-->
+<!--          <div style="background:#E84545" class="btn btn-secondary  category category-sports"><a href="https://railmadad.indianrailways.gov.in/">Complaint</a></div>-->
+<!--          <h3>-->
+<!--            Complaint (Rail Madad)-->
+<!--          </h3>-->
+<!--          <p>We recognize the importance of a reliable and efficient rail system, and we strive to deliver the best service to our passengers. Our Complaint Portal is specifically designed to provide you with a platform to voice your complaints and seek resolution.</p>-->
+<!--        </article>-->
+
+
+
+
+        <article class="card ">
+          <img style="height: 150px; border-radius:20px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJGIr7TTAez0hcn2JmFCk49xMZ_-OLr7PZ7Q&usqp=CAU" alt="">
+          <div class="category ">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle category category-ent" style="background-color:#071952;" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  News & Recruitment
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a style=" text-transform: lowercase;" class="dropdown-item" href="https://nwr.indianrailways.gov.in/view_section.jsp?fontColor=black&backgroundColor=LIGHTSTEELBLUE&lang=0&id=0,4,606">RRC-Jaipur</a>
+                  <a style=" text-transform: lowercase;" class="dropdown-item" href="https://nwr.indianrailways.gov.in/view_section.jsp?lang=0&id=0,4,947">Transfer & promotion of Gazetted Officer</a>
+                  <a style=" text-transform: lowercase;" class="dropdown-item" href="https://nwr.indianrailways.gov.in/view_section.jsp?lang=0&id=0,4,948">Transfer & Promotion of Non-Gazettated Staff</a>
+                  <a style=" text-transform: lowercase;" class="dropdown-item" href="https://nwr.indianrailways.gov.in/view_section.jsp?lang=0&id=0,4,267">news & annoucements</a>
+                  <a style=" text-transform: lowercase;" class="dropdown-item" href="https://nwr.indianrailways.gov.in/view_section.jsp?fontColor=black&backgroundColor=LIGHTSTEELBLUE&lang=0&id=0,4,268">press releases</a>
+                  <a style=" text-transform: lowercase;" class="dropdown-item" href="https://nwr.indianrailways.gov.in/view_section.jsp?fontColor=black&backgroundColor=LIGHTSTEELBLUE&lang=0&id=0,4,661">train accident enquiry report</a>
+                </div>
+              </div>
+          </div>
+          <h3 style="color:black;">
+            This is Our News & Recruitments Section.
+          </h3>
+<!--          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit repudiandae dolore reiciendis architecto soluta odio deleniti minima dicta eligendi voluptatum.</p>-->
+        </article>
+
+        <article class="card" style="background-color:#212121;padding:0px;border-style:none;">
+          <div>
+            <div style="background-color:#212121;padding:0px;" class=" category category-ent">
+             </div>
+            <h3>
+              <a style="color:#212121;font-size:0px;" href="article.html">Lorem ipsum dolor sit amet.</a>
+            </h3>
+            <p style="color:#212121;font-size:0px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium illo tempora natus eaque dolorum reiciendis? Voluptas ducimus expedita vitae saepe.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

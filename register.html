@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Register Page
+{% endblock %}
+
+{% block content %}
+<!--{{form}}-->
+    <body class="text-center" style="background: #212121">
+        <div class="container">
+            <form method="Post" class="form-register" style="color:white">
+
+<!--                used to protect the form against CSRF attacks-->
+                {{ form.hidden_tag() }}
+                <img style="height:150px;width:150px;margin-top:1rem;" class="mb-4" src="https://play-lh.googleusercontent.com/XUrpsBHKpTh1OMm5Pn-ejQZJWhjrKFp1JS6Df7Sc-vVuhuIIpRmdb-buCFiOApMBMw" alt="">
+                <h1 class= "h3 nb-3 font-weight-normal">
+                    Please Create your Account
+                </h1>
+                <br>
+                {{ form.username.label() }}
+                {{ form.username(class="form-control", placeholder = "User Name") }}
+
+                {{ form.email_address.label() }}
+                {{ form.email_address(class="form-control", placeholder = "Email Address") }}
+
+                {{ form.password1.label() }}
+                {{ form.password1(class="form-control", placeholder = "Password") }}
+
+                {{ form.password2.label() }}
+                {{ form.password2(class="form-control", placeholder = "Confirm Password") }}
+
+                <br>
+<!--                link if you already have an account-->
+                <div class="checkbox mb-3">
+                   <h6>Already have an account?</h6>
+                   <a class="btn btn-sm btn-secondary" href="{{ url_for('login_page') }}">Login</a>
+                </div>
+                <div style="padding-bottom:5rem;">{{ form.submit(class="btn btn-lg btn-block btn-primary") }}</div>
+            </form>
+        </div>
+    </body>
+{% endblock %}
+

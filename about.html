@@ -1,0 +1,489 @@
+{% extends "base.html" %}
+{% block title %}
+    About Page
+{% endblock %}
+
+{% block content %}
+
+<style>
+    :root{
+      --primary-color: #c72727;
+      --secondary-color: #f99500;
+      --light-color: #f3f3f3;
+      --dark-color:#333;
+      --max-width: 1100px;
+    }
+
+    .category{
+      --sports-color: #f99500;
+      --ent-color: #a66bbe;
+      --tech-color: #009cff;
+    }
+
+    *{
+      margin:0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body{
+      background: #212121;
+      font-family: 'Lato', sans-serif;
+      line-height: 1.5;
+    }
+
+    a{
+      color:#333;
+      text-decoration: none;
+    }
+
+    ul{
+      list-style: none;
+    }
+
+    p{
+      margin: 0.5rem 0;
+    }
+
+    img{
+      width:100%;
+    }
+
+    h1, h2, h3, h4, h5, h6{
+      font-family: 'Staatliches', cursive;
+      margin-bottom: 0.55rem;
+      line-height: 1.3;
+    }
+
+    /* utility */
+    .container{
+      max-width:var(--max-width) ;
+      margin:auto;
+      padding: 0 2rem;
+      overflow: hidden;
+    }
+
+    .category{
+      display: inline-block;
+      color: #fff;
+      padding: 0.4rem 0.6rem;
+      margin-bottom: 0.7rem;
+      border-radius: 15px;
+      text-transform: uppercase;
+      font-size: 0.65rem;
+      font-weight: bold;
+    }
+
+    .category-sports{
+      background: var(--sports-color);
+    }
+    .category-ent{
+      background: var(--ent-color);
+    }
+    .category-tech{
+      background: var(--tech-color);
+    }
+
+    .btn{
+      display: inline-block;
+      border: none;
+      background: var(--dark-color);
+      color:#fff;
+      padding:0.5rem 1.5rem;
+    }
+
+    .btn-light{
+      background: var(--light-color);
+    }
+    .btn-primary{
+      background: var(--primary-color);
+    }
+    .btn-secondary{
+      background: var(--secondary-color);
+    }
+    .btn-block{
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+    .btn:hover{
+      opacity: 0.9;
+    }
+
+    .card{
+      background: #fff;
+      padding:1rem;
+    }
+
+    .bg-dark{
+      background-color: var(--dark-color);
+      color: #fff;
+    }
+    .bg-primary{
+      background-color: var(--primary-color);
+      color: #ddd;
+    }
+    .bg-secondary{
+      background-color: var(--secondary-color);
+      color: #fff;
+    }
+
+    .bg-dark h1,
+    .bg-dark h2,
+    .bg-dark h3,
+    .bg-dark a,
+    .bg-primary h1,
+    .bg-primary h2,
+    .bg-primary h3,
+    .bg-primary a,
+    .bg-secondary h1,
+    .bg-secondary h2,
+    .bg-secondary h3,
+    .bg-secondary a{
+      color: #fff;
+    }
+
+    .py-1{ padding: 1.5rem 0;}
+    .py-2{ padding: 2rem 0;}
+    .py-3{ padding: 3rem 0;}
+    .p-1{ padding: 1.5rem;}
+    .p-2{ padding: 2rem;}
+    .p-3{ padding: 3rem;}
+
+    .l-heading{
+      font-size:3rem;
+    }
+
+    .list li{
+      padding:0.5rem 0;
+      border-bottom:#555 dotted 1px;
+      width: 90%;
+    }
+
+    .list li a:hover{
+      color:var(--primary-color) !important;
+    }
+
+    /* Inner page grid container */
+    .page-container{
+      display: grid;
+      grid-template-columns: 5fr 2fr;
+      margin: 1rem 0;
+      grid-gap: 1.5rem;
+    }
+
+    .page-container > *:first-child{
+      grid-row: 1 / span 3;
+    }
+
+    /* navigation */
+    #main-nav{
+      background-color: #fff;
+      position:sticky;
+      z-index: 2;
+      top:0;
+    }
+
+    #main-nav .container{
+      display: grid;
+      grid-template-columns: 6fr 3fr 1fr;
+      align-items: center;
+      padding:1rem;
+    }
+
+    #main-nav .logo{
+      width:180px;
+    }
+
+
+    #main-nav ul{
+      justify-self: end;
+      display: flex;
+    }
+
+    #main-nav ul li a{
+      padding:0.75rem;
+      font-weight:bold;
+    }
+
+    #main-nav ul li a.current{
+      background: var(--primary-color);
+      color: #fff;
+    }
+
+    #main-nav ul li a{
+      transition: all ease-in-out 0.4s;
+    }
+
+    #main-nav ul li a:hover{
+      background: var(--light-color);
+      color:var(--dark-color);
+    }
+
+    #main-nav .social{
+      justify-self: center;
+    }
+
+    #main-nav .social i{
+      color:#777;
+      margin-right:0.5rem;
+    }
+
+    #main-nav .social i:hover{
+      color: #333;
+    }
+
+    #showcase{
+      position: relative;
+      background: #333;
+      color: #fff;
+      padding:2rem;
+
+    }
+
+    #showcase:before{
+      content: '';
+      background: url('../image_resources/featured.jpg') no-repeat center center/cover;
+      position: absolute;
+      top:0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.5;
+    }
+    #showcase .showcase-container{
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      justify-content: center;
+      align-items: center;
+      height: 50vh;
+    }
+
+    #showcase .showcase-content{
+      z-index:1;
+    }
+
+    #showcase .showcase-content p{
+      margin-bottom: 1rem;
+    }
+
+
+    /* HOme article */
+    #home-articles .articles-container{
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      grid-gap: 1rem;
+    }
+
+    #home-articles .articles-container > *:first-child{
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      grid-gap: 1rem;
+      align-items: center;
+      grid-column: 1/span 2;
+    }
+    #home-articles .articles-container > *:last-child{
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      grid-gap: 1rem;
+      align-items: center;
+      grid-column: 2/span 2;
+    }
+
+    #article .meta{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #eee;
+      padding:0.5rem;
+    }
+
+    #article .meta .category{
+      margin-top: 0.4rem;
+    }
+
+
+    /* nsvigation */
+    #main-nav .social{
+      display: none;
+    }
+
+    #main-nav .container{
+      grid-template-columns: 1fr;
+      grid-gap: 1.2rem;
+    }
+
+    #main-nav ul,
+    #main-nav .logo{
+      justify-self: center;
+    }
+
+    #main-nav ul li a{
+      padding: 0.50rem;
+    }
+
+    #home-articles .articles-container{
+      grid-template-columns: repeat(2,1fr);
+    }
+
+    #home-articles .articles-container > *:first-child,
+    #home-articles .articles-container > *:last-child{
+      grid-template-columns: 1fr;
+      grid-column: 1;
+    }
+
+    @media(max-width: 600px){
+      /* stack grid item */
+      #showcase .showcase-container,
+      #home-articles .articles-container,
+      #main-footer .footer-container {
+        grid-template-columns: 1fr;
+      }
+
+      #main-footer .footer-container> *:last-child {
+        grid-column: 1;
+      }
+
+      #main-footer .footer-container > *:first-child,
+      #main-footer .footer-container > *:nth-child(2){
+        border-bottom: #444 dotted 1px;
+        padding-bottom: 1rem;
+      }
+
+      .page-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .page-container > *:first-child{
+        grid-row: 1;
+      }
+
+      .page-container .meta{
+        flex-direction: column;
+      }
+
+      .l-heading{
+        font-size: 2rem;
+      }
+
+    }
+</style>
+
+   <section id="about">
+    <div class="container">
+      <div class="page-container">
+        <article class="card">
+
+          <h1 class="l-heading" style="color:#212121;">About of North Western Railway</h1>
+
+
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img style="border-radius:10px;height:300px;" class="d-block w-100" src="https://images.jdmagicbox.com/comp/jaipur/y3/0141px141.x141.180223194858.f6y3/catalogue/office-of-chief-engineer-pwd-rajasthan-jaipur-jh3ew09967.jpg?clr=" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                  <img style="border-radius:10px;height:300px;" class="d-block w-100" src="https://pbs.twimg.com/media/E81-jJIVcAccdss.jpg:large" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                  <img style="border-radius:10px;height:300px;" class="d-block w-100" src="https://i0.wp.com/ajmernama.com/wp-content/uploads/2021/04/current-Pic-DRM-office.jpg?fit=700%2C400&ssl=1" alt="Third slide">
+                </div>
+                <div style="border-radius:10px;" class="carousel-item">
+                  <img style="border-radius:10px;height:300px;" class="d-block w-100" src="https://upload.wikimedia.org/wikipedia/commons/7/79/Jodhpur_Railway_Station.jpg" alt="Third slide">
+                </div>
+
+              </div>
+
+
+              <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+              </div>
+              <p style="color:#212121;">North Western Railway came being on 1st October, 2002. It was carved out of 2 divisions each from Northern
+              and Western Railways. The formation of this zone along with five other new zones was first approved by
+              Railway Board on 16th September, 1996 and foundation stone for this zone was laid on 17th October 1996 by
+              the then Prime Minister Shri H.D. Deve Gowda at K.P. Singh Stadium, Jaipur. The impetus for formation of
+              New Zone came with the Government of India notification no. 97/E&R/700/1/Notification dated 14.06.2002
+              wherein it was decided that North Western Railway with its jurisdiction over existing Jaipur and Ajmer
+              divisions of Western Railway and Jodhpur and Bikaner divisions of Northern Railway was to come into effect
+              from 1.10.2002.
+            <h5 style="color:#212121">Facts and Other Statistics</h5>
+            <br>
+            <p style="color:#212121;">Consisting of four divisions, this railway has a total of 578 stations covering a
+              total of 5449.29 route kms out of which 2575.03 are broad guage and 2874.23 are metre guage. The total
+              track kilometers of this railway, however, are 6559.546 kms. The four divisions are Ajmer, Bikaner, Jaipur
+              & Jodhpur. Jaipur & Ajmer divisions were originally part of Western Railway and Bikaner & Jodhpur were
+              part of Northern Railway. The total number of trains dealt by North Western Railway amounts to 452 out of
+              which BG trains total 264 and MG trains total 188.</p>
+
+            <h5 style="color:#212121">Brief Outline of the Divisions</h5>
+            <br>
+
+            <strong style="color:#212121">Jaipur Division</strong><p style="color:#212121;">This division was formed
+          after merging parts of BB&CI, Jaipur State Railways and Rajputana Malwa Railway,
+            Jaipur Division serves the states of Rajasthan, Uttar Pradesh and Haryana. Being a predominately passenger
+            earning division (84.92% of its earning is by way of passenger traffic), it deals primarily with cross
+            traffic consisting of fertilizer, cement, oil, salt, food grains, oil seeds, lime stone and gypsum traffic.
+            Container loading is done from here in bulk. The total no. of stations on this division is 128 and the total
+            no. of trains run are 146. Jaipur station alone deals with 88 BG & 22 MG trains and 35,000 passengers in a
+            day. In order to ensure that the passenger does not face any hardship for reservations the division has at
+            the moment 14 functioning Computerized Passenger Reservation System Centres. The staff strength of this
+            division in all categories is 12007.</p>
+
+
+            <strong style="color:#212121">Bikaner Division</strong><p style="color:#212121;">This division was established
+            in 1924 and it serves the states of Rajasthan, Punjab and
+            Haryana. This division has an equal amount of passenger and goods traffic. The main outward goods traffic of
+            this division is food grains, china clay and gypsum. The total no. of situations in this divisions is 198
+            and the total no. of trains dealt with are 142 including the railbus and BG and MG mail/exp and passenger
+            trains. Bikaner division has 12 Computerised Passenger Reservation System functioning and one Computerized
+            Passenger Reservation System at Ratangarh is about to be commissioned. A proposal for opening of PRS at
+            Mahendergarh has already been sent to Railway Board for sanction. The staff strength of this division in all
+            categories is 13728.</p>
+
+            <strong style="color:#212121">Jodhpur Division</strong><p style="color:#212121;">This division was up in the
+            year 1882 and it consists primarily of semi–urban districts
+            of Rajasthan. It covers areas of Jodhpur, Pali Marwar, Nagaur Jalore, Barmer, Jaisalmer. It also covers
+            certain districts of Gujarat state. This division also serves certain sensitive areas of Rajasthan such as
+            Jaisalmer, Barmer and Pokaran. The main commodities loaded on this division are lime stone, salt and gypsum.
+            This division has a total of 144 stations and deals with 92 trains in the inward and outward directions.
+            Fifteen Computerised Passenger Reservation System Centres exist over this division and another one is on the
+            anvil. A proposal for four more locations has already been sent. The staff strength of this division in all
+            categories is 10231.</p>
+
+
+            <strong style="color:#212121">Ajmer Division</strong><p style="color:#212121;">This division is spread over the states of Rajasthan
+            and Gujarat. It is predominantly a cement loading division as many cement plants of Rajasthan are located
+            within the jurisdiction of Ajmer. Rock phosphate, soap stone powder are loaded from Udaipur area.
+            This division is prominent on the religious and tourist map of India as it witnesses large amount of passenger traffic to Ajmer Sharief, Pushkar, Jain
+            Temples Dilwara at Mount Abu and Ranakpur Temples. This division has 130 stations and the total no. of
+            trains run over the division amounts to 36 in both the passenger and mail/exp category. At present there are
+            12 Computerized Passenger Reservation System Centres functioning over this division and one location is
+            awaiting commissioning. Proposals for 3 more locations have already been sent. The staff strength of this
+            division in all categories is 9046.</p>
+        </article>
+
+          <aside class="card" style="background:  #a66bbe;">
+            <h3 style="color:#fff;">Site links</h3>
+            <ul class="list">
+              <li><a href="https://nwr.indianrailways.gov.in/view_section.jsp?lang=0&id=0,1,261">History of NWR</a></li>
+              <li><a href="https://nwr.indianrailways.gov.in/view_section.jsp?lang=0&id=0,1,656">General Manager</a></li>
+              <li><a href="https://nwr.indianrailways.gov.in/view_section.jsp?lang=0&id=0,1,304">Department</a></li>
+              <li><a href="https://nwr.indianrailways.gov.in/view_section.jsp?lang=0&id=0,1,265">Portal Policies</a></li>
+              <li><a href="https://nwr.indianrailways.gov.in/view_section.jsp?lang=0&id=0,1,285">System Map</a></li>
+              <li><a href="https://nwr.indianrailways.gov.in/view_section.jsp?lang=0&id=0,1,291">Division</a></li>
+            </ul>
+          </aside>
+
+      </div>
+    </div>
+  </section>
+
+
+{% endblock %}
